@@ -1,0 +1,20 @@
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Dependencias
+/vendor/
+composer.lock
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+error_log
+
+# Archivos de configuración con credenciales
+config/credentials.php
+config/database.php
