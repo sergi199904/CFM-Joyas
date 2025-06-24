@@ -1,43 +1,136 @@
-/* Tipografía y reset */
+/* Tipografías y reset */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin: 0;
+  scroll-behavior: smooth;
+  line-height: 1.6;
+  color: #333;
 }
 
-/* — Navbar oficial CFM Joyas — */
-.gradient-bg {
-  background: linear-gradient(90deg, #000, #333);
+/* Títulos elegantes */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #2c2c2c;
 }
 
-.logo {
-  height: 50px;
-  margin-right: 12px;
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
 }
 
-/* Navbar 100% negro con texto blanco */
+h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+p, .lead {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.lead {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #666;
+}
+
+/* — Navbar sticky y elegante — */
 .custom-nav {
   background-color: #000 !important;
   background-image: none !important;
   border-bottom: none !important;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  transition: all 0.3s ease;
+}
+
+/* Agregar padding al body para compensar navbar fijo */
+body {
+  padding-top: 76px;
 }
 
 .custom-nav .navbar-brand,
 .custom-nav .nav-link,
 .custom-toggler .fas {
   color: #fff !important;
+  font-family: 'Inter', sans-serif;
+}
+
+.custom-nav .navbar-brand {
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+.logo {
+  height: 45px;
+  margin-right: 12px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .custom-nav .nav-link {
   text-transform: uppercase;
   font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+  margin: 0 5px;
 }
 
 .custom-nav .nav-link:hover {
-  color: #ccc !important;
+  color: #ffd700 !important;
+  transform: translateY(-2px);
+}
+
+.custom-nav .nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  background-color: #ffd700;
+  transition: all 0.3s ease;
+}
+
+.custom-nav .nav-link:hover:after {
+  width: 100%;
+  left: 0;
 }
 
 .custom-toggler {
   border: none;
+  transition: transform 0.3s ease;
+}
+
+.custom-toggler:hover {
+  transform: rotate(90deg);
 }
 
 .custom-toggler .fas {
@@ -49,75 +142,515 @@ body {
   .custom-nav .nav-link {
     margin-left: 0;
     margin-bottom: 8px;
+    padding: 12px 20px;
+    border-radius: 5px;
+  }
+  
+  .custom-nav .nav-link:hover {
+    background: rgba(255,255,255,0.1);
   }
 }
 
-/* — Tarjetas uniformes y animaciones — */
+/* — Header elegante — */
+header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+header .header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem !important;
+  font-weight: 700;
+  color: #2c2c2c;
+  margin-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+header .lead {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+header p {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 1rem;
+}
+
+/* Responsive para header */
+@media (max-width: 768px) {
+  header {
+    padding: 40px 0 30px;
+  }
+  
+  header .header-title {
+    font-size: 2.2rem !important;
+    letter-spacing: 0.5px;
+  }
+  
+  header .lead {
+    font-size: 1.1rem;
+  }
+}
+
+/* — Secciones uniformes — */
+section {
+  padding: 80px 0;
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.8rem;
+  color: #2c2c2c;
+  position: relative;
+}
+
+section h2:after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(45deg, #ffd700, #ffb347);
+  border-radius: 2px;
+}
+
+/* — Carrusel mejorado — */
+.carousel-item img {
+  border-radius: 0;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+}
+
+.carousel:hover .carousel-item img {
+  filter: brightness(1);
+}
+
+.carousel-caption {
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.carousel-caption h5 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-caption p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+/* Mejoras responsive para carrusel */
+@media (min-width: 768px) {
+  .carousel-item img {
+    height: 450px;
+    object-fit: cover !important;
+    object-position: center;
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel-item img {
+    height: 275px;
+    object-fit: contain;
+    background: #f8f9fa;
+  }
+}
+
+/* — Tarjetas de productos mejoradas — */
 .product-card {
   display: flex;
   flex-direction: column;
-  height: 300px;                /* altura reducida */
+  height: 350px;
   overflow: hidden;
-  opacity: 0;                   /* invisible hasta animar */
+  opacity: 0;
   animation: zoomIn 0.6s ease-out forwards;
-  animation-delay: 0.2s;        /* retraso único */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation-delay: 0.2s;
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: relative;
 }
 
 .product-card .card-img-top {
-  flex: 0 0 100px;              /* altura de imagen reducida */
+  height: 250px;
   width: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-/* Hover: zoom más pronunciado & cursor pointer */
 .product-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer; /* muestra mano al pasar encima */
+  cursor: pointer;
 }
 
 .product-card:hover {
-  transform: scale(1.1);       /* zoom 110% */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
-/* Animación zoomIn para la entrada */
+.product-card:hover .card-img-top {
+  transform: scale(1.1);
+}
+
+/* Overlay de información del producto */
+.product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.9));
+  color: white;
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-info {
+  transform: translateY(0);
+}
+
+.product-info h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.product-info p {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Badges de precio y categoría */
+.product-price {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(45deg, #28a745, #20c997);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 4px 12px rgba(40,167,69,0.3);
+  z-index: 10;
+  animation: pulse 2s infinite;
+}
+
+.category-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+/* Animaciones */
 @keyframes zoomIn {
   from {
     opacity: 0;
-    transform: scale(0.8);
+    transform: scale(0.8) translateY(30px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 
-/* — Sección “Síguenos” — */
+@keyframes pulse {
+  0% { box-shadow: 0 4px 12px rgba(40,167,69,0.3); }
+  50% { box-shadow: 0 6px 16px rgba(40,167,69,0.5); }
+  100% { box-shadow: 0 4px 12px rgba(40,167,69,0.3); }
+}
+
+/* Filtros de categoría */
+.category-filter {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px;
+  padding: 25px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.category-filter h5 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.filter-btn {
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: white;
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin: 5px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  backdrop-filter: blur(5px);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(255,255,255,0.95);
+  color: #333;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  border-color: white;
+}
+
+/* Botón de administración flotante */
+.admin-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1000;
+  background: linear-gradient(45deg, #007bff, #0056b3);
+  border: none;
+  border-radius: 50px;
+  padding: 15px 20px;
+  box-shadow: 0 8px 25px rgba(0,123,255,0.4);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 12px 30px rgba(0,123,255,0.6);
+  background: linear-gradient(45deg, #0056b3, #003d82);
+}
+
+/* — Sección "Síguenos" mejorada — */
 .social-media {
   text-align: center;
-  padding: 40px 0 20px;
+  padding: 60px 0 40px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .social-media h4 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-style: italic;
-  margin-bottom: 16px;
-  color: #222;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .social-icons {
   display: inline-flex;
-  gap: 24px;
+  gap: 30px;
+}
+
+.social-icon {
+  transition: all 0.3s ease;
+  padding: 15px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.social-icon:hover {
+  transform: translateY(-8px) rotate(5deg);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }
 
 .social-icon img {
   display: block;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .social-icon:hover img {
-  transform: scale(1.1);
-  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+/* Formularios mejorados */
+.form-control {
+  border-radius: 10px;
+  border: 2px solid #e9ecef;
+  padding: 12px 15px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.form-label {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 12px 25px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-dark {
+  background: linear-gradient(45deg, #333, #000);
+}
+
+.btn-dark:hover {
+  background: linear-gradient(45deg, #000, #333);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Footer mejorado */
+footer {
+  background: linear-gradient(135deg, #212529 0%, #000 100%) !important;
+  padding: 40px 0;
+  margin-top: 0;
+  border-top: none;
+}
+
+footer h5, footer h6 {
+  font-family: 'Playfair Display', serif;
+  color: #ffd700;
+  font-weight: 600;
+}
+
+footer p, footer .small {
+  font-family: 'Inter', sans-serif;
+  color: #ccc;
+}
+
+/* Asegurar que no haya espacios blancos */
+body {
+  margin: 0;
+  padding-top: 76px;
+  padding-bottom: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+/* Mejoras responsive */
+@media (max-width: 768px) {
+  body {
+    padding-top: 70px;
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+  }
+  
+  section h2 {
+    font-size: 2rem;
+  }
+  
+  .product-card {
+    height: 280px;
+  }
+  
+  .product-card .card-img-top {
+    height: 180px;
+  }
+  
+  .admin-btn {
+    bottom: 15px;
+    right: 15px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .filter-btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    margin: 3px;
+  }
+  
+  .social-icons {
+    gap: 20px;
+  }
+}
+
+/* Estados de carga */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Efectos de scroll */
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* FORZAR título pequeño - OVERRIDE total */
+header h1,
+header .header-title,
+.header-title {
+  font-size: 4rem !important;
+  line-height: 1.2 !important;
+  margin: 10px 0 !important;
+  padding: 0 !important;
+  font-weight: 600 !important;
+}
+
+/* Reducir padding del header */
+header {
+  padding: 30px 0 20px !important;
 }
