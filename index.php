@@ -405,21 +405,24 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     </div>
   </section>
 
-  <!-- Sección Ubicación -->
-  <section id="ubicacion" class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="mb-4">Ubicación</h2>
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <iframe src="https://maps.google.com/maps?q=Zapallar,+Chile&output=embed"
-                  width="100%" height="300" style="border:0; border-radius:10px;" class="shadow"></iframe>
-          <p class="mt-3 text-muted">
-            <i class="fas fa-map-marker-alt"></i> Zapallar, Chile
-          </p>
-        </div>
+<!-- Sección Ubicación -->
+<section id="ubicacion" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="mb-4">Ubicación</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <iframe src="https://maps.google.com/maps?q=-32.5541667,-71.4577222&output=embed"
+                width="100%" height="300" style="border:0; border-radius:10px;" class="shadow"></iframe>
+        <p class="mt-3 text-muted">
+          <i class="fas fa-map-marker-alt"></i> Zapallar, Región de Valparaíso, Chile
+        </p>
+        <p class="text-muted small">
+          <i class="fas fa-compass"></i> 32°33'15.0"S 71°27'27.8"W
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Redes Sociales -->
   <div class="social-media text-center py-4">
