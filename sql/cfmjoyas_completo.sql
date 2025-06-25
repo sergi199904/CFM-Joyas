@@ -1,10 +1,8 @@
 -- ================================================
 -- BASE DE DATOS COMPLETA CFM JOYAS
--- Versión: 2.0 con todas las funcionalidades
+-- Versión: 2.2 sin usuario admin (se crea automáticamente)
 -- ================================================
 
--- Eliminar base de datos si existe y crearla nueva
-DROP DATABASE IF EXISTS cfmjoyas;
 CREATE DATABASE cfmjoyas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE cfmjoyas;
 
@@ -25,7 +23,7 @@ CREATE TABLE usuarios (
 );
 
 -- ================================================
--- TABLA DE CATEGORÍAS
+-- TABLA DE CATEGORÍAS (con las nuevas categorías)
 -- ================================================
 CREATE TABLE categorias (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -52,67 +50,49 @@ CREATE TABLE productos (
 );
 
 -- ================================================
--- INSERTAR CATEGORÍAS PREDETERMINADAS
+-- INSERTAR TODAS LAS CATEGORÍAS (originales + nuevas)
 -- ================================================
 INSERT INTO categorias (nombre, descripcion) VALUES 
+-- Categorías ORIGINALES (las que ya tenías)
 ('joyas', 'Anillos, collares, pulseras, aretes y accesorios de joyería'),
 ('ceramicas', 'Productos de cerámica artesanal y decorativa'),
-('otros', 'Otros accesorios y productos especiales');
+('otros', 'Otros accesorios y productos especiales'),
+
+-- Categorías NUEVAS (específicas para joyas)
+('collares', 'Collares y cadenas con diferentes estilos y materiales'),
+('pulseras', 'Pulseras artesanales y con diseños únicos'),
+('aretes', 'Aretes de diferentes tamaños y estilos'),
+('anillos', 'Anillos con piedras y diseños especiales');
 
 -- ================================================
--- CREAR USUARIO ADMINISTRADOR
+-- NOTA: EL USUARIO ADMIN SE CREA AUTOMÁTICAMENTE
+-- No insertamos usuario admin aquí porque se genera 
+-- automáticamente en includes/db.php con el hash correcto
 -- ================================================
--- Email: admin@cfmjoyas.com
--- Contraseña: admin123
--- Código: CFM2025
-INSERT INTO usuarios (email, nombre, password, codigo_acceso, activo, intentos_fallidos) VALUES 
-('admin@cfmjoyas.com', 'Administrador CFM Joyas', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'CFM2025', TRUE, 0);
 
 -- ================================================
--- INSERTAR PRODUCTOS DE EJEMPLO (opcional)
+-- INSERTAR PRODUCTOS DE EJEMPLO
 -- ================================================
 INSERT INTO productos (nombre, precio, categoria, instagram, imagen) VALUES 
+-- Productos con categorías ORIGINALES
 ('Collar de Plata Elegante', 25000, 'joyas', 'https://instagram.com/p/ejemplo1', 'img/productos/collar_plata.jpg'),
 ('Aretes de Oro Rosa', 18000, 'joyas', 'https://instagram.com/p/ejemplo2', 'img/productos/aretes_oro.jpg'),
 ('Taza Cerámica Artesanal', 12000, 'ceramicas', 'https://instagram.com/p/ejemplo3', 'img/productos/taza_ceramica.jpg'),
-('Pulsera Personalizada', 15000, 'joyas', 'https://instagram.com/p/ejemplo4', 'img/productos/pulsera_personalizada.jpg'),
-('Plato Decorativo', 22000, 'ceramicas', 'https://instagram.com/p/ejemplo5', 'img/productos/plato_decorativo.jpg'),
-('Llavero Especial', 8000, 'otros', 'https://instagram.com/p/ejemplo6', 'img/productos/llavero_especial.jpg');
+('Llavero Especial', 8000, 'otros', 'https://instagram.com/p/ejemplo6', 'img/productos/llavero_especial.jpg'),
 
--- ================================================
--- VERIFICACIONES Y CONSULTAS DE INFORMACIÓN
--- ================================================
+-- Productos con categorías NUEVAS específicas
+('Collar Piedra Natural Amatista', 28000, 'collares', 'https://instagram.com/p/cfmjoyas1', 'img/productos/collar_amatista.jpg'),
+('Collar Cuarzo Rosa', 22000, 'collares', 'https://instagram.com/p/cfmjoyas2', 'img/productos/collar_cuarzo.jpg'),
+('Pulsera Plata con Dijes', 16000, 'pulseras', 'https://instagram.com/p/cfmjoyas3', 'img/productos/pulsera_dijes.jpg'),
+('Pulsera Artesanal Macramé', 14000, 'pulseras', 'https://instagram.com/p/cfmjoyas4', 'img/productos/pulsera_macrame.jpg'),
+('Aretes Largos Bohemios', 19000, 'aretes', 'https://instagram.com/p/cfmjoyas5', 'img/productos/aretes_bohemios.jpg'),
+('Aretes Pequeños Plata', 12000, 'aretes', 'https://instagram.com/p/cfmjoyas6', 'img/productos/aretes_pequenos.jpg'),
+('Anillo Plata Ajustable', 15000, 'anillos', 'https://instagram.com/p/cfmjoyas7', 'img/productos/anillo_plata.jpg'),
+('Anillo con Piedra Luna', 20000, 'anillos', 'https://instagram.com/p/cfmjoyas8', 'img/productos/anillo_luna.jpg'),
 
--- Mostrar estructura de tablas
-SELECT '=== ESTRUCTURA TABLA USUARIOS ===' AS info;
-DESCRIBE usuarios;
-
-SELECT '=== ESTRUCTURA TABLA CATEGORIAS ===' AS info;
-DESCRIBE categorias;
-
-SELECT '=== ESTRUCTURA TABLA PRODUCTOS ===' AS info;
-DESCRIBE productos;
-
--- Mostrar datos insertados
-SELECT '=== USUARIO ADMINISTRADOR CREADO ===' AS info;
-SELECT id, email, nombre, codigo_acceso, activo, fecha_creacion 
-FROM usuarios WHERE email = 'admin@cfmjoyas.com';
-
-SELECT '=== CATEGORÍAS DISPONIBLES ===' AS info;
-SELECT id, nombre, descripcion, activa FROM categorias;
-
-SELECT '=== PRODUCTOS DE EJEMPLO ===' AS info;
-SELECT id, nombre, precio, categoria, fecha FROM productos;
-
-SELECT '=== RESUMEN ESTADÍSTICAS ===' AS info;
-SELECT 
-    (SELECT COUNT(*) FROM usuarios) AS total_usuarios,
-    (SELECT COUNT(*) FROM categorias) AS total_categorias,
-    (SELECT COUNT(*) FROM productos) AS total_productos,
-    (SELECT COUNT(*) FROM productos WHERE categoria = 'joyas') AS productos_joyas,
-    (SELECT COUNT(*) FROM productos WHERE categoria = 'ceramicas') AS productos_ceramicas,
-    (SELECT COUNT(*) FROM productos WHERE categoria = 'otros') AS productos_otros,
-    (SELECT ROUND(AVG(precio), 0) FROM productos) AS precio_promedio;
+-- Más productos de cerámicas y otros
+('Plato Decorativo', 18000, 'ceramicas', 'https://instagram.com/p/ejemplo4', 'img/productos/plato_decorativo.jpg'),
+('Pulsera Personalizada', 15000, 'otros', 'https://instagram.com/p/ejemplo5', 'img/productos/pulsera_personalizada.jpg');
 
 -- ================================================
 -- CONFIGURACIONES ADICIONALES
@@ -121,11 +101,13 @@ SELECT
 -- Configurar charset para evitar problemas de caracteres especiales
 ALTER DATABASE cfmjoyas CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- Configurar timezone (opcional, ajustar según tu zona)
--- SET time_zone = '-03:00'; -- Chile
+-- ================================================
+-- VERIFICACIONES FINALES
+-- ================================================
 
 SELECT '=== BASE DE DATOS CFM JOYAS CREADA EXITOSAMENTE ===' AS mensaje;
-SELECT 'Credenciales de acceso:' AS info;
-SELECT 'Email: admin@cfmjoyas.com' AS credential;
-SELECT 'Contraseña: admin123' AS credential;
-SELECT 'Código: CFM2025' AS credential;
+SELECT 'ADMIN SE CREA AUTOMÁTICAMENTE EN PRIMER ACCESO' AS info;
+SELECT 'Credenciales: admin@cfmjoyas.com / admin123 / CFM2025' AS credentials;
+SELECT '=== 7 CATEGORÍAS DISPONIBLES ===' AS categoria_info;
+SELECT 'Originales: joyas, ceramicas, otros' AS originales;
+SELECT 'Nuevas: collares, pulseras, aretes, anillos' AS nuevas;

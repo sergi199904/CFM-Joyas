@@ -253,28 +253,53 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     </div>
   </section>
 
-  <!-- Filtro de Categorías -->
+  <!-- Filtro de Categorías ACTUALIZADO -->
   <section class="py-3">
     <div class="container">
       <div class="category-filter text-center">
         <h5 class="mb-3"><i class="fas fa-filter"></i> Filtrar por categoría</h5>
         <div>
+          <!-- Filtro "Todas" -->
           <a href="index.php" class="btn filter-btn <?= empty($categoria_filtro) ? 'active' : '' ?>">
             <i class="fas fa-th"></i> Todas
           </a>
-          <?php while ($cat = $categories->fetch_assoc()): ?>
-            <a href="index.php?categoria=<?= urlencode($cat['nombre']) ?>" 
-               class="btn filter-btn <?= $categoria_filtro === $cat['nombre'] ? 'active' : '' ?>">
-              <?php if ($cat['nombre'] === 'joyas'): ?>
-                <i class="fas fa-gem"></i>
-              <?php elseif ($cat['nombre'] === 'ceramicas'): ?>
-                <i class="fas fa-palette"></i>
-              <?php else: ?>
-                <i class="fas fa-star"></i>
-              <?php endif; ?>
-              <?= ucfirst($cat['nombre']) ?> (<?= $cat['total'] ?>)
-            </a>
-          <?php endwhile; ?>
+          
+          <!-- Categorías principales ORIGINALES -->
+          <a href="index.php?categoria=joyas" 
+             class="btn filter-btn <?= $categoria_filtro === 'joyas' ? 'active' : '' ?>">
+            <i class="fas fa-gem"></i> Joyas
+          </a>
+          
+          <a href="index.php?categoria=ceramicas" 
+             class="btn filter-btn <?= $categoria_filtro === 'ceramicas' ? 'active' : '' ?>">
+            <i class="fas fa-palette"></i> Cerámicas
+          </a>
+          
+          <a href="index.php?categoria=otros" 
+             class="btn filter-btn <?= $categoria_filtro === 'otros' ? 'active' : '' ?>">
+            <i class="fas fa-star"></i> Otros
+          </a>
+          
+          <!-- NUEVAS categorías específicas -->
+          <a href="index.php?categoria=collares" 
+             class="btn filter-btn <?= $categoria_filtro === 'collares' ? 'active' : '' ?>">
+            <i class="fas fa-circle-notch"></i> Collares
+          </a>
+          
+          <a href="index.php?categoria=pulseras" 
+             class="btn filter-btn <?= $categoria_filtro === 'pulseras' ? 'active' : '' ?>">
+            <i class="fas fa-link"></i> Pulseras
+          </a>
+          
+          <a href="index.php?categoria=aretes" 
+             class="btn filter-btn <?= $categoria_filtro === 'aretes' ? 'active' : '' ?>">
+            <i class="fas fa-earring"></i> Aretes
+          </a>
+          
+          <a href="index.php?categoria=anillos" 
+             class="btn filter-btn <?= $categoria_filtro === 'anillos' ? 'active' : '' ?>">
+            <i class="fas fa-ring"></i> Anillos
+          </a>
         </div>
       </div>
     </div>
