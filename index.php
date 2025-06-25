@@ -132,16 +132,15 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
       transform: translateY(0);
     }
     
-    .category-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.7);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 10px;
-      font-size: 0.8rem;
-      text-transform: uppercase;
+    /* Mejora para navegación de secciones */
+    section {
+      scroll-margin-top: 90px; /* Espacio para navbar fija */
+    }
+    
+    /* Asegurar que los títulos no se corten */
+    #historia, #productos, #contacto, #ubicacion {
+      padding-top: 100px !important;
+      margin-top: -20px;
     }
   </style>
 </head>
@@ -185,62 +184,70 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     </p>
   </header>
 
-  <!-- Carrusel -->
-  <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="3"></button>
-      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="4"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img src="img/carrusel/Image 8.jpg" class="d-block w-100" alt="Collares con Piedras Naturales">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Collares con Piedras Naturales</h5>
-          <p>Hermosos collares con gemas de colores únicos</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="img/carrusel/Image 2.jpg" class="d-block w-100" alt="Pulseras Artesanales">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Pulseras Artesanales</h5>
-          <p>Variedad de pulseras con diseños únicos y detalles especiales</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="img/carrusel/Image 12.jpg" class="d-block w-100" alt="Colección Premium">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Colección Premium</h5>
-          <p>Joyas selectas en nuestra vitrina principal</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="img/carrusel/Image 7.jpg" class="d-block w-100" alt="Cerámicas Artesanales">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Cerámicas Artesanales</h5>
-          <p>Piezas únicas de cerámica hechas a mano</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="img/carrusel/Image 1.jpg" class="d-block w-100" alt="Ambiente de Tienda">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Nuestra Tienda</h5>
-          <p>Ambiente acogedor con la mejor selección de joyas</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide-prev">
-      <span class="carousel-control-prev-icon"></span>
-      <span class="visually-hidden">Anterior</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-      <span class="visually-hidden">Siguiente</span>
-    </button>
+ <!-- Carrusel Mejorado - Reemplazar en index.php -->
+<div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="3"></button>
+    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="4"></button>
   </div>
-
+  
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="carousel-image-container">
+        <img src="img\Carrusel\Image 8.jpg" class="d-block w-100 carousel-img" alt="Collares con Piedras Naturales">
+        <div class="carousel-overlay"></div>
+      </div>
+      </div>
+    </div>
+    
+    <div class="carousel-item">
+      <div class="carousel-image-container">
+        <img src="img/carrusel/Image 2.jpg" class="d-block w-100 carousel-img" alt="Pulseras Artesanales">
+        <div class="carousel-overlay"></div>
+      </div>
+    </div>
+    
+    <div class="carousel-item">
+      <div class="carousel-image-container">
+        <img src="img/carrusel/Image 12.jpg" class="d-block w-100 carousel-img" alt="Colección Premium">
+        <div class="carousel-overlay"></div>
+      </div>
+    </div>
+    
+    <div class="carousel-item">
+      <div class="carousel-image-container">
+        <img src="img/carrusel/Image 7.jpg" class="d-block w-100 carousel-img" alt="Cerámicas Artesanales">
+        <div class="carousel-overlay"></div>
+      </div>
+    </div>
+    
+    <div class="carousel-item">
+      <div class="carousel-image-container">
+        <img src="img\Carrusel\image 10.jpg" class="d-block w-100 carousel-img" alt="Ambiente de Tienda">
+        <div class="carousel-overlay"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Controles mejorados -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+    <div class="carousel-control-icon">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  
+  <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+    <div class="carousel-control-icon">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+    <span class="visually-hidden">Siguiente</span>
+  </button>
+</div>
   <!-- Sección Historia -->
   <section id="historia" class="py-5 text-center">
     <div class="container">
@@ -254,49 +261,49 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
   </section>
 
   <!-- Filtro de Categorías ACTUALIZADO -->
-  <section class="py-3">
+  <section class="py-3" id="filtros">
     <div class="container">
       <div class="category-filter text-center">
         <h5 class="mb-3"><i class="fas fa-filter"></i> Filtrar por categoría</h5>
         <div>
           <!-- Filtro "Todas" -->
-          <a href="index.php" class="btn filter-btn <?= empty($categoria_filtro) ? 'active' : '' ?>">
+          <a href="index.php#productos" class="btn filter-btn <?= empty($categoria_filtro) ? 'active' : '' ?>">
             <i class="fas fa-th"></i> Todas
           </a>
           
           <!-- Categorías principales ORIGINALES -->
-          <a href="index.php?categoria=joyas" 
+          <a href="index.php?categoria=joyas#productos" 
              class="btn filter-btn <?= $categoria_filtro === 'joyas' ? 'active' : '' ?>">
             <i class="fas fa-gem"></i> Joyas
           </a>
           
-          <a href="index.php?categoria=ceramicas" 
+          <a href="index.php?categoria=ceramicas#productos" 
              class="btn filter-btn <?= $categoria_filtro === 'ceramicas' ? 'active' : '' ?>">
             <i class="fas fa-palette"></i> Cerámicas
           </a>
           
-          <a href="index.php?categoria=otros" 
+          <a href="index.php?categoria=otros#productos" 
              class="btn filter-btn <?= $categoria_filtro === 'otros' ? 'active' : '' ?>">
             <i class="fas fa-star"></i> Otros
           </a>
           
           <!-- NUEVAS categorías específicas -->
-          <a href="index.php?categoria=collares" 
+          <a href="index.php?categoria=collares#productos" 
              class="btn filter-btn <?= $categoria_filtro === 'collares' ? 'active' : '' ?>">
             <i class="fas fa-circle-notch"></i> Collares
           </a>
           
-          <a href="index.php?categoria=pulseras" 
+          <a href="index.php?categoria=pulseras#productos" 
              class="btn filter-btn <?= $categoria_filtro === 'pulseras' ? 'active' : '' ?>">
             <i class="fas fa-link"></i> Pulseras
           </a>
           
-          <a href="index.php?categoria=aretes" 
+          <a href="index.php?categoria=aretes#productos" 
              class="btn filter-btn <?= $categoria_filtro === 'aretes' ? 'active' : '' ?>">
             <i class="fas fa-earring"></i> Aretes
           </a>
           
-          <a href="index.php?categoria=anillos" 
+          <a href="index.php?categoria=anillos#productos" 
              class="btn filter-btn <?= $categoria_filtro === 'anillos' ? 'active' : '' ?>">
             <i class="fas fa-ring"></i> Anillos
           </a>
@@ -319,7 +326,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
         <div class="text-center py-5">
           <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
           <h4 class="text-muted">No hay productos en esta categoría</h4>
-          <a href="index.php" class="btn btn-primary mt-3">Ver todos los productos</a>
+          <a href="index.php#productos" class="btn btn-primary mt-3">Ver todos los productos</a>
         </div>
       <?php else: ?>
         <div class="row g-4">
@@ -418,7 +425,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
   <div class="social-media text-center py-4">
     <h4>¡Síguenos en nuestras redes sociales!</h4>
     <div class="social-icons d-flex justify-content-center gap-4 mt-3">
-      <a href="https://www.facebook.com/profile.php?id=100075879374011"
+      <a href="https://www.instagram.com/cfmjoyas/"
          target="_blank" class="social-icon">
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg"
              alt="Instagram" width="40" height="40">
@@ -471,15 +478,29 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
         el.classList.add('visible');
       });
       
-      // Smooth scroll para navegación
+      // SCROLL AUTOMÁTICO A PRODUCTOS SI HAY FILTRO APLICADO
+      <?php if ($categoria_filtro): ?>
+        // Si hay una categoría seleccionada, hacer scroll a productos
+        setTimeout(() => {
+          document.getElementById('productos').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 100);
+      <?php endif; ?>
+      
+      // Smooth scroll para navegación con offset para navbar
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
+          const targetId = this.getAttribute('href');
+          const target = document.querySelector(targetId);
           if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
+            // Calcular posición con offset para navbar (90px)
+            const targetPosition = target.offsetTop - 90;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
             });
           }
         });

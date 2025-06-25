@@ -227,6 +227,10 @@ section h2:after {
   border-radius: 0;
   filter: brightness(0.9);
   transition: filter 0.3s ease;
+  height: auto !important;
+  width: 100% !important;
+  object-fit: contain !important;
+  background: #f8f9fa;
 }
 
 .carousel:hover .carousel-item img {
@@ -255,16 +259,17 @@ section h2:after {
 /* Mejoras responsive para carrusel */
 @media (min-width: 768px) {
   .carousel-item img {
-    height: 450px;
-    object-fit: cover !important;
-    object-position: center;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    object-position: center !important;
   }
 }
 
 @media (max-width: 767px) {
   .carousel-item img {
-    height: 275px;
-    object-fit: contain;
+    height: auto !important;
+    object-fit: contain !important;
     background: #f8f9fa;
   }
 }
@@ -653,4 +658,290 @@ header .header-title,
 /* Reducir padding del header */
 header {
   padding: 30px 0 20px !important;
+}
+
+/* Mejora para navegación de secciones */
+section {
+  scroll-margin-top: 90px; /* Espacio para navbar fija */
+}
+
+/* Asegurar que los títulos no se corten */
+#historia, #productos, #contacto, #ubicacion {
+  padding-top: 100px !important;
+  margin-top: -20px;
+}
+
+/* === CARRUSEL ESPECTACULAR === */
+.carousel {
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+}
+
+.carousel-img {
+  max-width: 70%;
+  max-height: 380px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 8s ease-in-out;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* Efecto Ken Burns (zoom lento) */
+.carousel-item.active .carousel-img {
+  transform: scale(1.1);
+}
+
+/* Márgenes difuminados elegantes */
+.carousel-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 100%;
+  background: linear-gradient(to right, 
+    rgba(44,44,44,1) 0%, 
+    rgba(44,44,44,0.8) 30%, 
+    rgba(44,44,44,0.3) 70%, 
+    transparent 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.carousel-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15%;
+  height: 100%;
+  background: linear-gradient(to left, 
+    rgba(44,44,44,1) 0%, 
+    rgba(44,44,44,0.8) 30%, 
+    rgba(44,44,44,0.3) 70%, 
+    transparent 100%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Caption sin fondo oscuro */
+.carousel-caption {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: none;
+  padding: 20px;
+  text-align: center;
+}
+
+.carousel-content {
+  max-width: 600px;
+  margin: 0 auto;
+  animation: slideUpFade 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.carousel-item.active .carousel-content {
+  animation: slideUpFade 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+  letter-spacing: 1px;
+}
+
+.carousel-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+  line-height: 1.5;
+}
+
+/* Botón espectacular */
+.btn-carousel {
+  background: linear-gradient(45deg, #ffd700, #ffb347);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+  text-decoration: none;
+}
+
+.btn-carousel:hover {
+  background: linear-gradient(45deg, #ffb347, #ffd700);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255,215,0,0.6);
+  color: #000;
+}
+
+/* Controles elegantes */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+.carousel-control-icon {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-icon i {
+  color: white;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.carousel-control-prev:hover .carousel-control-icon,
+.carousel-control-next:hover .carousel-control-icon {
+  background: rgba(255,215,0,0.9);
+  border-color: #ffd700;
+  transform: scale(1.1);
+}
+
+.carousel-control-prev:hover .carousel-control-icon i,
+.carousel-control-next:hover .carousel-control-icon i {
+  color: #000;
+}
+
+/* Indicadores dorados */
+.carousel-indicators {
+  bottom: 20px;
+  margin-bottom: 0;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+  background: transparent;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+  background: #ffd700;
+  border-color: #ffd700;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255,215,0,0.8);
+}
+
+/* Efecto fade entre slides */
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition-duration: 0.8s;
+  transition-property: opacity;
+}
+
+.carousel-fade .carousel-item.active {
+  opacity: 1;
+}
+
+/* Responsive para carrusel mejorado */
+@media (max-width: 768px) {
+  .carousel-img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .carousel-image-container {
+    height: auto;
+  }
+  
+  .carousel-title {
+    font-size: 1.8rem;
+  }
+  
+  .carousel-description {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .carousel-caption {
+    padding: 40px 15px 30px;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .carousel-control-icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .carousel-control-prev {
+    left: 10px;
+  }
+  
+  .carousel-control-next {
+    right: 10px;
+  }
+  
+  .btn-carousel {
+    padding: 10px 25px;
+    font-size: 0.85rem;
+  }
 }

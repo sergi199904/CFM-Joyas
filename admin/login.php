@@ -71,13 +71,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .form-control { background: rgba(255,255,255,0.9); }
         .alert-danger { background: rgba(220,53,69,0.9); color: white; }
         .text-warning { color: #ffc107 !important; }
+        
+        /* Botón oculto súper discreto */
+        .secret-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 215, 0, 0.4); /* Doradito muy sutil */
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0.3;
+        }
+        
+        .secret-btn:hover {
+            opacity: 1;
+            background: rgba(255, 215, 0, 0.8);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
     </style>
 </head>
 <body class="d-flex align-items-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
-                <div class="card login-card shadow-lg">
+                <div class="card login-card shadow-lg position-relative">
+                    
+                    <!-- BOTÓN SÚPER OCULTO - Solo tú lo notarás -->
+                    <button onclick="window.location.href='register.php'" 
+                            class="secret-btn" 
+                            title="Crear cuenta"></button>
+                    
                     <div class="card-body p-5">
                         <div class="text-center mb-4">
                             <i class="fas fa-gem fa-3x text-warning mb-3"></i>
