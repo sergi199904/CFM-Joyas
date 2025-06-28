@@ -75,24 +75,9 @@ INSERT INTO categorias (nombre, descripcion) VALUES
 -- ================================================
 INSERT INTO productos (nombre, precio, categoria, instagram, imagen) VALUES 
 -- Productos con categorías ORIGINALES
-('Collar de Plata Elegante', 25000, 'joyas', 'https://instagram.com/p/ejemplo1', 'img/productos/collar_plata.jpg'),
-('Aretes de Oro Rosa', 18000, 'joyas', 'https://instagram.com/p/ejemplo2', 'img/productos/aretes_oro.jpg'),
-('Taza Cerámica Artesanal', 12000, 'ceramicas', 'https://instagram.com/p/ejemplo3', 'img/productos/taza_ceramica.jpg'),
-('Llavero Especial', 8000, 'otros', 'https://instagram.com/p/ejemplo6', 'img/productos/llavero_especial.jpg'),
-
 -- Productos con categorías NUEVAS específicas
-('Collar Piedra Natural Amatista', 28000, 'collares', 'https://instagram.com/p/cfmjoyas1', 'img/productos/collar_amatista.jpg'),
-('Collar Cuarzo Rosa', 22000, 'collares', 'https://instagram.com/p/cfmjoyas2', 'img/productos/collar_cuarzo.jpg'),
-('Pulsera Plata con Dijes', 16000, 'pulseras', 'https://instagram.com/p/cfmjoyas3', 'img/productos/pulsera_dijes.jpg'),
-('Pulsera Artesanal Macramé', 14000, 'pulseras', 'https://instagram.com/p/cfmjoyas4', 'img/productos/pulsera_macrame.jpg'),
-('Aretes Largos Bohemios', 19000, 'aretes', 'https://instagram.com/p/cfmjoyas5', 'img/productos/aretes_bohemios.jpg'),
-('Aretes Pequeños Plata', 12000, 'aretes', 'https://instagram.com/p/cfmjoyas6', 'img/productos/aretes_pequenos.jpg'),
-('Anillo Plata Ajustable', 15000, 'anillos', 'https://instagram.com/p/cfmjoyas7', 'img/productos/anillo_plata.jpg'),
-('Anillo con Piedra Luna', 20000, 'anillos', 'https://instagram.com/p/cfmjoyas8', 'img/productos/anillo_luna.jpg'),
 
 -- Más productos de cerámicas y otros
-('Plato Decorativo', 18000, 'ceramicas', 'https://instagram.com/p/ejemplo4', 'img/productos/plato_decorativo.jpg'),
-('Pulsera Personalizada', 15000, 'otros', 'https://instagram.com/p/ejemplo5', 'img/productos/pulsera_personalizada.jpg');
 
 -- ================================================
 -- CONFIGURACIONES ADICIONALES
