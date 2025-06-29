@@ -75,27 +75,46 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     }
     
     .category-filter {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #000 0%, #2c2c2c 100%) !important;
       color: white;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 30px;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 2px solid rgba(255, 215, 0, 0.2);
+    }
+    
+    .category-filter h5 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      color: #ffd700 !important;
+      margin-bottom: 20px;
     }
     
     .filter-btn {
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-      border-radius: 20px;
-      padding: 8px 16px;
+      background: rgba(255, 215, 0, 0.1) !important;
+      border: 2px solid rgba(255, 215, 0, 0.3) !important;
+      color: white !important;
+      border-radius: 25px;
+      padding: 10px 20px;
       margin: 5px;
       transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      backdrop-filter: blur(5px);
     }
     
     .filter-btn:hover, .filter-btn.active {
-      background: rgba(255,255,255,0.9);
-      color: #333;
-      transform: translateY(-2px);
+      background: linear-gradient(45deg, #ffd700, #ffb347) !important;
+      color: #000 !important;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+      border-color: #ffd700 !important;
+      font-weight: 600;
+      text-decoration: none;
     }
     
     .product-card {
@@ -141,6 +160,103 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     #historia, #productos, #contacto, #ubicacion {
       padding-top: 100px !important;
       margin-top: -20px;
+    }
+
+    /* ESTILOS PARA FORMULARIO DE CONTACTO MEJORADO */
+    .form-control.is-valid {
+      border-color: #28a745;
+      background-image: none;
+    }
+
+    .form-control.is-invalid {
+      border-color: #dc3545;
+      background-image: none;
+    }
+
+    .valid-feedback, .invalid-feedback {
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    .valid-feedback {
+      color: #28a745;
+    }
+
+    .invalid-feedback {
+      color: #dc3545;
+    }
+
+    /* Animación del botón */
+    #submitBtn {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #submitBtn:disabled {
+      opacity: 0.7;
+      transform: none !important;
+    }
+
+    #submitBtn.loading {
+      pointer-events: none;
+    }
+
+    #submitBtn.loading .btn-text {
+      opacity: 0;
+    }
+
+    #submitBtn.loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid #fff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Contador de caracteres */
+    #charCount {
+      font-weight: 600;
+    }
+
+    .char-warning {
+      color: #ffc107 !important;
+    }
+
+    .char-danger {
+      color: #dc3545 !important;
+    }
+
+    /* Modal personalizado */
+    .modal-content {
+      border-radius: 15px;
+    }
+
+    .modal-header {
+      border-radius: 15px 15px 0 0;
+    }
+
+    /* Animación de entrada */
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -373,7 +489,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
                   <div class="product-info">
                     <h6 class="mb-2"><?= htmlspecialchars($row['nombre']) ?></h6>
                     <p class="mb-2">
-                      <i class="fas fa-tag"></i> $<?= number_format($row['precio'], 0, ',', '.') ?> CLP
+                      <i class="fas fa-tag"></i> <?= ucfirst(htmlspecialchars($row['categoria'])) ?>
                     </p>
                     <p class="mb-0">
                       <i class="fab fa-instagram"></i> Ver en Instagram
@@ -388,7 +504,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     </div>
   </section>
 
-  <!-- Sección Contacto -->
+  <!-- Sección Contacto MEJORADA -->
   <section id="contacto" class="py-5">
     <div class="container">
       <h2 class="text-center mb-4">Contáctanos</h2>
@@ -396,24 +512,70 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
         <div class="col-md-6">
           <div class="card shadow">
             <div class="card-body">
-              <form action="send_email.php" method="POST" novalidate>
+              <form id="contactForm" action="send_email.php" method="POST" novalidate>
+                <!-- Campo Nombre -->
                 <div class="mb-3">
-                  <label class="form-label">Nombre</label>
-                  <input type="text" name="name" class="form-control" placeholder="Tu nombre" required>
+                  <label for="name" class="form-label">
+                    <i class="fas fa-user"></i> Nombre <span class="text-danger">*</span>
+                  </label>
+                  <input type="text" name="name" id="name" class="form-control" 
+                         placeholder="Tu nombre completo" required minlength="2" maxlength="50">
+                  <div class="invalid-feedback">
+                    El nombre debe tener entre 2 y 50 caracteres.
+                  </div>
+                  <div class="valid-feedback">
+                    ¡Perfecto!
+                  </div>
                 </div>
+
+                <!-- Campo Email -->
                 <div class="mb-3">
-                  <label class="form-label">Correo Electrónico</label>
-                  <input type="email" name="email" class="form-control" placeholder="tu@email.com" required>
+                  <label for="email" class="form-label">
+                    <i class="fas fa-envelope"></i> Correo Electrónico <span class="text-danger">*</span>
+                  </label>
+                  <input type="email" name="email" id="email" class="form-control" 
+                         placeholder="tu@email.com" required>
+                  <div class="invalid-feedback">
+                    Por favor ingresa un email válido.
+                  </div>
+                  <div class="valid-feedback">
+                    ¡Email válido!
+                  </div>
                 </div>
+
+                <!-- Campo Mensaje -->
                 <div class="mb-3">
-                  <label class="form-label">Mensaje</label>
-                  <textarea name="message" class="form-control" rows="4" 
-                            placeholder="Cuéntanos sobre tu consulta..." required></textarea>
+                  <label for="message" class="form-label">
+                    <i class="fas fa-comment"></i> Mensaje <span class="text-danger">*</span>
+                  </label>
+                  <textarea name="message" id="message" class="form-control" rows="4" 
+                            placeholder="Cuéntanos sobre tu consulta, producto de interés, o cualquier pregunta..." 
+                            required minlength="10" maxlength="500"></textarea>
+                  <div class="invalid-feedback">
+                    El mensaje debe tener entre 10 y 500 caracteres.
+                  </div>
+                  <div class="valid-feedback">
+                    ¡Mensaje perfecto!
+                  </div>
+                  <small class="text-muted">
+                    <span id="charCount">0</span>/500 caracteres
+                  </small>
                 </div>
+
+                <!-- Botón Submit -->
                 <div class="text-center">
-                  <button type="submit" class="btn btn-dark btn-lg">
-                    <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                  <button type="submit" id="submitBtn" class="btn btn-dark btn-lg">
+                    <i class="fas fa-paper-plane"></i> 
+                    <span class="btn-text">Enviar Mensaje</span>
                   </button>
+                </div>
+
+                <!-- Indicador de carga -->
+                <div id="loadingSpinner" class="text-center mt-3" style="display: none;">
+                  <div class="spinner-border text-warning" role="status">
+                    <span class="visually-hidden">Enviando...</span>
+                  </div>
+                  <p class="mt-2 text-muted">Enviando tu mensaje...</p>
                 </div>
               </form>
             </div>
@@ -487,6 +649,78 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
       <p class="mb-0">&copy; 2025 CFM Joyas. Todos los derechos reservados.</p>
     </div>
   </footer>
+
+  <!-- MODALES PARA FORMULARIO DE CONTACTO -->
+
+  <!-- Modal de Éxito -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-success text-white border-0">
+          <h5 class="modal-title" id="successModalLabel">
+            <i class="fas fa-check-circle"></i> ¡Mensaje Enviado!
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="mb-3">
+            <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+          </div>
+          <h4 class="text-success mb-3">¡Gracias por contactarnos!</h4>
+          <p class="text-muted mb-3">
+            Tu mensaje ha sido enviado exitosamente. Nos pondremos en contacto contigo a la brevedad.
+          </p>
+          <div class="alert alert-info border-0" style="background: rgba(255, 215, 0, 0.1);">
+            <i class="fas fa-info-circle text-warning"></i>
+            <strong>Tiempo de respuesta:</strong> 24-48 horas hábiles
+          </div>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-warning px-4" data-bs-dismiss="modal">
+            <i class="fas fa-gem"></i> Continuar explorando
+          </button>
+          <a href="https://wa.me/+56998435160" target="_blank" class="btn btn-success px-4">
+            <i class="fab fa-whatsapp"></i> WhatsApp directo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Error -->
+  <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg">
+        <div class="modal-header bg-danger text-white border-0">
+          <h5 class="modal-title" id="errorModalLabel">
+            <i class="fas fa-exclamation-triangle"></i> Error al Enviar
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center py-4">
+          <div class="mb-3">
+            <i class="fas fa-times-circle text-danger" style="font-size: 4rem;"></i>
+          </div>
+          <h4 class="text-danger mb-3">Oops, algo salió mal</h4>
+          <p class="text-muted mb-3" id="errorMessage">
+            Hubo un problema al enviar tu mensaje. Por favor intenta nuevamente.
+          </p>
+          <div class="alert alert-warning border-0">
+            <i class="fas fa-lightbulb text-warning"></i>
+            <strong>Alternativa:</strong> Puedes contactarnos directamente por WhatsApp
+          </div>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fas fa-redo"></i> Intentar nuevamente
+          </button>
+          <a href="https://wa.me/+56998435160" target="_blank" class="btn btn-success">
+            <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Bootstrap 5 JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -580,6 +814,142 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
           }
         });
       });
+
+      // SCRIPT PARA VALIDACIONES DEL FORMULARIO DE CONTACTO
+      const form = document.getElementById('contactForm');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const messageInput = document.getElementById('message');
+      const submitBtn = document.getElementById('submitBtn');
+      const charCount = document.getElementById('charCount');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+
+      // Solo ejecutar si existen los elementos
+      if (form && nameInput && emailInput && messageInput) {
+        
+        // Contador de caracteres
+        messageInput.addEventListener('input', function() {
+          const count = this.value.length;
+          charCount.textContent = count;
+          
+          if (count > 450) {
+            charCount.className = 'char-danger';
+          } else if (count > 400) {
+            charCount.className = 'char-warning';
+          } else {
+            charCount.className = '';
+          }
+        });
+
+        // Validación en tiempo real
+        function validateField(field) {
+          const value = field.value.trim();
+          let isValid = true;
+
+          // Limpiar clases previas
+          field.classList.remove('is-valid', 'is-invalid');
+
+          if (field.type === 'email') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            isValid = emailRegex.test(value);
+          } else if (field.hasAttribute('minlength')) {
+            isValid = value.length >= parseInt(field.getAttribute('minlength'));
+          } else {
+            isValid = value.length > 0;
+          }
+
+          // Aplicar clase de validación
+          if (value.length > 0) {
+            field.classList.add(isValid ? 'is-valid' : 'is-invalid');
+          }
+
+          return isValid;
+        }
+
+        // Eventos de validación
+        [nameInput, emailInput, messageInput].forEach(field => {
+          field.addEventListener('blur', () => validateField(field));
+          field.addEventListener('input', () => {
+            if (field.classList.contains('is-invalid')) {
+              validateField(field);
+            }
+          });
+        });
+
+        // Envío del formulario
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          // Validar todos los campos
+          const nameValid = validateField(nameInput);
+          const emailValid = validateField(emailInput);
+          const messageValid = validateField(messageInput);
+
+          if (!nameValid || !emailValid || !messageValid) {
+            // Enfocar el primer campo inválido
+            const firstInvalid = form.querySelector('.is-invalid');
+            if (firstInvalid) {
+              firstInvalid.focus();
+              firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+          }
+
+          // Mostrar loading
+          submitBtn.classList.add('loading');
+          submitBtn.disabled = true;
+          if (loadingSpinner) {
+            loadingSpinner.style.display = 'block';
+          }
+
+          // Envío real
+          const formData = new FormData(form);
+
+          fetch('send_email.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.text())
+          .then(data => {
+            // Ocultar loading
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            if (loadingSpinner) {
+              loadingSpinner.style.display = 'none';
+            }
+
+            if (data.includes('éxito') || data.includes('enviado')) {
+              // Mostrar modal de éxito
+              const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+              successModal.show();
+              
+              // Limpiar formulario
+              form.reset();
+              [nameInput, emailInput, messageInput].forEach(field => {
+                field.classList.remove('is-valid', 'is-invalid');
+              });
+              charCount.textContent = '0';
+            } else {
+              // Mostrar modal de error
+              document.getElementById('errorMessage').textContent = data;
+              const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+              errorModal.show();
+            }
+          })
+          .catch(error => {
+            // Ocultar loading y mostrar error
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            if (loadingSpinner) {
+              loadingSpinner.style.display = 'none';
+            }
+            
+            document.getElementById('errorMessage').textContent = 'Error de conexión. Verifica tu internet e intenta nuevamente.';
+            const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+          });
+        });
+      }
     });
   </script>
 </body>
