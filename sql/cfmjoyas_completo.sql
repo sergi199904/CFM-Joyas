@@ -73,7 +73,6 @@ INSERT INTO categorias (nombre, descripcion) VALUES
 -- ================================================
 -- INSERTAR PRODUCTOS DE EJEMPLO
 -- ================================================
-INSERT INTO productos (nombre, precio, categoria, instagram, imagen) VALUES 
 -- Productos con categorías ORIGINALES
 -- Productos con categorías NUEVAS específicas
 

@@ -7,6 +7,14 @@ body {
   scroll-behavior: smooth;
   line-height: 1.6;
   color: #333;
+  padding-top: 76px;
+  padding-bottom: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
 }
 
 /* Títulos elegantes */
@@ -66,11 +74,6 @@ p, .lead {
   width: 100%;
   z-index: 1030;
   transition: all 0.3s ease;
-}
-
-/* Agregar padding al body para compensar navbar fijo */
-body {
-  padding-top: 76px;
 }
 
 .custom-nav .navbar-brand,
@@ -154,17 +157,21 @@ body {
 /* — Header elegante — */
 header {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  padding: 60px 0 40px;
+  padding: 30px 0 20px !important;
   text-align: center;
 }
 
-header .header-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8rem !important;
-  font-weight: 700;
+header .header-title,
+header h1,
+.header-title {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 4rem !important;
+  font-weight: 600 !important;
   color: #2c2c2c;
-  margin-bottom: 0.5rem;
+  margin: 10px 0 !important;
+  padding: 0 !important;
   letter-spacing: 1px;
+  line-height: 1.2 !important;
 }
 
 header .lead {
@@ -183,12 +190,17 @@ header p {
 
 /* Responsive para header */
 @media (max-width: 768px) {
-  header {
-    padding: 40px 0 30px;
+  body {
+    padding-top: 70px;
   }
   
-  header .header-title {
-    font-size: 2.2rem !important;
+  header {
+    padding: 40px 0 30px !important;
+  }
+  
+  header .header-title,
+  header h1 {
+    font-size: 2.5rem !important;
     letter-spacing: 0.5px;
   }
   
@@ -200,6 +212,7 @@ header p {
 /* — Secciones uniformes — */
 section {
   padding: 80px 0;
+  scroll-margin-top: 90px;
 }
 
 section h2 {
@@ -222,56 +235,237 @@ section h2:after {
   border-radius: 2px;
 }
 
-/* — Carrusel mejorado — */
-.carousel-item img {
-  border-radius: 0;
-  filter: brightness(0.9);
-  transition: filter 0.3s ease;
-  height: auto !important;
-  width: 100% !important;
-  object-fit: contain !important;
-  background: #f8f9fa;
+/* Asegurar que los títulos no se corten */
+#historia, #productos, #contacto, #ubicacion {
+  padding-top: 100px !important;
+  margin-top: -20px;
 }
 
-.carousel:hover .carousel-item img {
-  filter: brightness(1);
+/* === CARRUSEL ARREGLADO Y OPTIMIZADO === */
+.carousel {
+  margin-bottom: 0;
+  position: relative;
+  overflow: hidden;
 }
 
+.carousel-image-container {
+  position: relative;
+  overflow: hidden;
+  height: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
+  padding: 0;
+}
+
+.carousel-img {
+  width: 100%;
+  max-height: 90%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 6s ease-in-out;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  background: rgba(255,255,255,0.05);
+}
+
+/* Efecto Ken Burns más suave */
+.carousel-item.active .carousel-img {
+  transform: scale(1.05);
+}
+
+/* DIFUMINADO SUTIL EN LOS MÁRGENES */
+.carousel-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5%;
+  height: 100%;
+  background: linear-gradient(to right, 
+    rgba(44,44,44,1) 0%, 
+    rgba(44,44,44,0.5) 70%, 
+    transparent 100%);
+  z-index: 10;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
+
+.carousel-image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5%;
+  height: 100%;
+  background: linear-gradient(to left, 
+    rgba(44,44,44,1) 0%, 
+    rgba(44,44,44,0.5) 70%, 
+    transparent 100%);
+  z-index: 10;
+  pointer-events: none;
+  backdrop-filter: blur(2px);
+}
+
+/* Caption sin fondo oscuro */
 .carousel-caption {
-  background: linear-gradient(transparent, rgba(0,0,0,0.7));
-  border-radius: 10px;
-  backdrop-filter: blur(5px);
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: none;
+  padding: 20px;
+  text-align: center;
 }
 
-.carousel-caption h5 {
+.carousel-content {
+  max-width: 600px;
+  margin: 0 auto;
+  animation: slideUpFade 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.carousel-item.active .carousel-content {
+  animation: slideUpFade 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes slideUpFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.carousel-title {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
+  letter-spacing: 1px;
 }
 
-.carousel-caption p {
+.carousel-description {
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.95);
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+  line-height: 1.5;
 }
 
-/* Mejoras responsive para carrusel */
-@media (min-width: 768px) {
-  .carousel-item img {
-    height: auto !important;
-    max-height: none !important;
-    object-fit: contain !important;
-    object-position: center !important;
-  }
+/* Botón espectacular */
+.btn-carousel {
+  background: linear-gradient(45deg, #ffd700, #ffb347);
+  border: none;
+  color: #000;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  padding: 12px 30px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+  text-decoration: none;
 }
 
-@media (max-width: 767px) {
-  .carousel-item img {
-    height: auto !important;
-    object-fit: contain !important;
-    background: #f8f9fa;
-  }
+.btn-carousel:hover {
+  background: linear-gradient(45deg, #ffb347, #ffd700);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(255,215,0,0.6);
+  color: #000;
+}
+
+/* Controles elegantes */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-prev {
+  left: 20px;
+}
+
+.carousel-control-next {
+  right: 20px;
+}
+
+.carousel-control-icon {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.carousel-control-icon i {
+  color: white;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.carousel-control-prev:hover .carousel-control-icon,
+.carousel-control-next:hover .carousel-control-icon {
+  background: rgba(255,215,0,0.9);
+  border-color: #ffd700;
+  transform: scale(1.1);
+}
+
+.carousel-control-prev:hover .carousel-control-icon i,
+.carousel-control-next:hover .carousel-control-icon i {
+  color: #000;
+}
+
+/* Indicadores dorados */
+.carousel-indicators {
+  bottom: 20px;
+  margin-bottom: 0;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+  background: transparent;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators button.active {
+  background: #ffd700;
+  border-color: #ffd700;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255,215,0,0.8);
+}
+
+/* Efecto fade entre slides */
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition-duration: 0.8s;
+  transition-property: opacity;
+}
+
+.carousel-fade .carousel-item.active {
+  opacity: 1;
 }
 
 /* — Tarjetas de productos mejoradas — */
@@ -554,59 +748,6 @@ footer p, footer .small {
   color: #ccc;
 }
 
-/* Asegurar que no haya espacios blancos */
-body {
-  margin: 0;
-  padding-top: 76px;
-  padding-bottom: 0;
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #fff;
-}
-
-/* Mejoras responsive */
-@media (max-width: 768px) {
-  body {
-    padding-top: 70px;
-  }
-  
-  header h1 {
-    font-size: 2.5rem;
-  }
-  
-  section h2 {
-    font-size: 2rem;
-  }
-  
-  .product-card {
-    height: 280px;
-  }
-  
-  .product-card .card-img-top {
-    height: 180px;
-  }
-  
-  .admin-btn {
-    bottom: 15px;
-    right: 15px;
-    padding: 12px 16px;
-    font-size: 0.9rem;
-  }
-  
-  .filter-btn {
-    padding: 8px 15px;
-    font-size: 0.9rem;
-    margin: 3px;
-  }
-  
-  .social-icons {
-    gap: 20px;
-  }
-}
-
 /* Estados de carga */
 .loading {
   opacity: 0.7;
@@ -644,268 +785,46 @@ html, body {
   transform: translateY(0);
 }
 
-/* FORZAR título pequeño - OVERRIDE total */
-header h1,
-header .header-title,
-.header-title {
-  font-size: 4rem !important;
-  line-height: 1.2 !important;
-  margin: 10px 0 !important;
-  padding: 0 !important;
-  font-weight: 600 !important;
-}
-
-/* Reducir padding del header */
-header {
-  padding: 30px 0 20px !important;
-}
-
-/* Mejora para navegación de secciones */
-section {
-  scroll-margin-top: 90px; /* Espacio para navbar fija */
-}
-
-/* Asegurar que los títulos no se corten */
-#historia, #productos, #contacto, #ubicacion {
-  padding-top: 100px !important;
-  margin-top: -20px;
-}
-
-/* === CARRUSEL ESPECTACULAR === */
-.carousel {
-  margin-bottom: 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.carousel-image-container {
-  position: relative;
-  overflow: hidden;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #2c2c2c 0%, #1a1a1a 100%);
-}
-
-.carousel-img {
-  max-width: 70%;
-  max-height: 380px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  transition: transform 8s ease-in-out;
-  display: block;
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-}
-
-/* Efecto Ken Burns (zoom lento) */
-.carousel-item.active .carousel-img {
-  transform: scale(1.1);
-}
-
-/* Márgenes difuminados elegantes */
-.carousel-image-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 15%;
-  height: 100%;
-  background: linear-gradient(to right, 
-    rgba(44,44,44,1) 0%, 
-    rgba(44,44,44,0.8) 30%, 
-    rgba(44,44,44,0.3) 70%, 
-    transparent 100%);
-  z-index: 10;
-  pointer-events: none;
-}
-
-.carousel-image-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 15%;
-  height: 100%;
-  background: linear-gradient(to left, 
-    rgba(44,44,44,1) 0%, 
-    rgba(44,44,44,0.8) 30%, 
-    rgba(44,44,44,0.3) 70%, 
-    transparent 100%);
-  z-index: 10;
-  pointer-events: none;
-}
-
-/* Caption sin fondo oscuro */
-.carousel-caption {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  background: none;
-  padding: 20px;
-  text-align: center;
-}
-
-.carousel-content {
-  max-width: 600px;
-  margin: 0 auto;
-  animation: slideUpFade 0.8s ease-out forwards;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.carousel-item.active .carousel-content {
-  animation: slideUpFade 0.8s ease-out 0.3s forwards;
-}
-
-@keyframes slideUpFade {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.carousel-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
-  letter-spacing: 1px;
-}
-
-.carousel-description {
-  font-family: 'Inter', sans-serif;
-  font-size: 1.1rem;
-  color: rgba(255,255,255,0.95);
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
-  line-height: 1.5;
-}
-
-/* Botón espectacular */
-.btn-carousel {
-  background: linear-gradient(45deg, #ffd700, #ffb347);
-  border: none;
-  color: #000;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  padding: 12px 30px;
-  border-radius: 50px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255,215,0,0.4);
-  text-decoration: none;
-}
-
-.btn-carousel:hover {
-  background: linear-gradient(45deg, #ffb347, #ffd700);
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 25px rgba(255,215,0,0.6);
-  color: #000;
-}
-
-/* Controles elegantes */
-.carousel-control-prev,
-.carousel-control-next {
-  width: 60px;
-  height: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.8;
-  transition: all 0.3s ease;
-}
-
-.carousel-control-prev {
-  left: 20px;
-}
-
-.carousel-control-next {
-  right: 20px;
-}
-
-.carousel-control-icon {
-  background: rgba(255,255,255,0.2);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255,255,255,0.3);
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
-
-.carousel-control-icon i {
-  color: white;
-  font-size: 1.2rem;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-}
-
-.carousel-control-prev:hover .carousel-control-icon,
-.carousel-control-next:hover .carousel-control-icon {
-  background: rgba(255,215,0,0.9);
-  border-color: #ffd700;
-  transform: scale(1.1);
-}
-
-.carousel-control-prev:hover .carousel-control-icon i,
-.carousel-control-next:hover .carousel-control-icon i {
-  color: #000;
-}
-
-/* Indicadores dorados */
-.carousel-indicators {
-  bottom: 20px;
-  margin-bottom: 0;
-}
-
-.carousel-indicators button {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.5);
-  background: transparent;
-  margin: 0 5px;
-  transition: all 0.3s ease;
-}
-
-.carousel-indicators button.active {
-  background: #ffd700;
-  border-color: #ffd700;
-  transform: scale(1.3);
-  box-shadow: 0 0 10px rgba(255,215,0,0.8);
-}
-
-/* Efecto fade entre slides */
-.carousel-fade .carousel-item {
-  opacity: 0;
-  transition-duration: 0.8s;
-  transition-property: opacity;
-}
-
-.carousel-fade .carousel-item.active {
-  opacity: 1;
-}
-
-/* Responsive para carrusel mejorado */
+/* === RESPONSIVE MEJORADO === */
 @media (max-width: 768px) {
-  .carousel-img {
-    width: 100%;
-    height: auto;
+  section h2 {
+    font-size: 2rem;
   }
   
+  .product-card {
+    height: 280px;
+  }
+  
+  .product-card .card-img-top {
+    height: 180px;
+  }
+  
+  .admin-btn {
+    bottom: 15px;
+    right: 15px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+  }
+  
+  .filter-btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    margin: 3px;
+  }
+  
+  .social-icons {
+    gap: 20px;
+  }
+  
+  /* Carrusel responsive */
   .carousel-image-container {
-    height: auto;
+    height: 350px;
+    padding: 0;
+  }
+  
+  .carousel-img {
+    width: 100%;
+    max-height: 95%;
   }
   
   .carousel-title {
@@ -918,7 +837,7 @@ section {
   }
   
   .carousel-caption {
-    padding: 40px 15px 30px;
+    padding: 30px 15px 20px;
   }
   
   .carousel-control-prev,
@@ -943,5 +862,11 @@ section {
   .btn-carousel {
     padding: 10px 25px;
     font-size: 0.85rem;
+  }
+  
+  /* Difuminado más pequeño en móvil */
+  .carousel-image-container::before,
+  .carousel-image-container::after {
+    width: 4%;
   }
 }

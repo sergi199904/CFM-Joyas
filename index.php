@@ -205,21 +205,21 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     
     <div class="carousel-item">
       <div class="carousel-image-container">
-        <img src="img/carrusel/Image 2.jpg" class="d-block w-100 carousel-img" alt="Pulseras Artesanales">
+        <img src="img\Carrusel\Image 2.jpg" class="d-block w-100 carousel-img" alt="Pulseras Artesanales">
         <div class="carousel-overlay"></div>
       </div>
     </div>
     
     <div class="carousel-item">
       <div class="carousel-image-container">
-        <img src="img/carrusel/Image 12.jpg" class="d-block w-100 carousel-img" alt="Colección Premium">
+        <img src="img\Carrusel\Image 1.jpg" class="d-block w-100 carousel-img" alt="Colección Premium">
         <div class="carousel-overlay"></div>
       </div>
     </div>
     
     <div class="carousel-item">
       <div class="carousel-image-container">
-        <img src="img/carrusel/Image 7.jpg" class="d-block w-100 carousel-img" alt="Cerámicas Artesanales">
+        <img src="img\Carrusel\image 11.jpg" class="d-block w-100 carousel-img" alt="Cerámicas Artesanales">
         <div class="carousel-overlay"></div>
       </div>
     </div>
