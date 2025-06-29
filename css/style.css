@@ -601,11 +601,11 @@ section h2:after {
   }
 }
 
-/* — Tarjetas de productos mejoradas CON INFORMACIÓN SIEMPRE VISIBLE — */
+/* — Tarjetas de productos mejoradas SIN ESPACIO BLANCO — */
 .product-card {
   display: flex;
   flex-direction: column;
-  height: 420px; /* Aumentamos altura para dar espacio al texto */
+  height: 420px; /* Altura total de la card */
   overflow: hidden;
   opacity: 0;
   animation: zoomIn 0.6s ease-out forwards;
@@ -615,13 +615,22 @@ section h2:after {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   position: relative;
   cursor: pointer;
+  background: white;
+  /* ELIMINAR CUALQUIER ESPACIO */
+  margin: 0;
+  padding: 0;
 }
 
 .product-card .card-img-top {
-  height: 280px; /* Reducimos altura de imagen */
+  height: 280px; /* Altura aumentada para eliminar espacio */
   width: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
+  /* ELIMINAR ESPACIOS */
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: block;
 }
 
 .product-card:hover {
@@ -633,81 +642,100 @@ section h2:after {
   transform: scale(1.1);
 }
 
-/* Información del producto SIEMPRE VISIBLE */
+/* INFORMACIÓN DEL PRODUCTO SIN ESPACIO BLANCO */
 .product-info {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(44,44,44,0.95) 100%);
+  background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(44,44,44,0.98) 100%);
   color: white;
-  padding: 15px;
-  transform: translateY(0); /* Siempre visible */
+  padding: 20px 15px;
+  transform: translateY(0);
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   border-radius: 0 0 15px 15px;
-  min-height: 120px; /* Altura mínima garantizada */
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* ELIMINAR ESPACIOS */
+  margin: 0;
+  border-top: none; /* Sin borde superior que pueda crear espacio */
 }
 
 /* Efecto hover en la información */
 .product-card:hover .product-info {
   background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
   color: #000;
-  padding: 20px 15px;
-  min-height: 130px;
+  padding: 25px 15px;
+  min-height: 150px;
+  box-shadow: 0 -5px 20px rgba(255, 215, 0, 0.3);
 }
 
+/* TÍTULO DEL PRODUCTO - SIEMPRE BLANCO */
 .product-info h6 {
   font-family: 'Playfair Display', serif;
   font-weight: 600;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
   line-height: 1.3;
+  text-align: center;
+  color: white !important;
+}
+
+/* TÍTULO EN HOVER - NEGRO */
+.product-card:hover .product-info h6 {
+  color: #000 !important;
 }
 
 .product-info p {
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  margin-bottom: 5px;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
   line-height: 1.4;
-}
-
-/* Badges de precio y categoría */
-.product-price {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  background: linear-gradient(45deg, #28a745, #20c997);
+  text-align: center;
   color: white;
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  font-family: 'Inter', sans-serif;
-  box-shadow: 0 4px 12px rgba(40,167,69,0.3);
-  z-index: 10;
-  animation: pulse 2s infinite;
 }
 
+/* TEXTO EN HOVER - NEGRO */
+.product-card:hover .product-info p {
+  color: #000;
+}
+
+.product-info .price-display {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 8px;
+  color: white;
+}
+
+/* PRECIO EN HOVER - NEGRO */
+.product-card:hover .product-info .price-display {
+  color: #000 !important;
+  text-shadow: none;
+}
+
+/* Badge de categoría */
 .category-badge {
   position: absolute;
   top: 15px;
   left: 15px;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   color: white;
-  padding: 6px 10px;
-  border-radius: 12px;
-  font-size: 0.8rem;
+  padding: 8px 12px;
+  border-radius: 15px;
+  font-size: 0.85rem;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Inter', sans-serif;
   z-index: 10;
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* COLORES MEJORADOS PARA CATEGORÍAS - ACORDES AL DISEÑO CFM JOYAS */
-
-/* Badge de categorías con nuevos colores */
+/* COLORES MEJORADOS PARA CATEGORÍAS */
 .badge.bg-secondary {
   background: linear-gradient(45deg, #ffd700, #ffb347) !important;
   color: #000 !important;
@@ -725,47 +753,40 @@ section h2:after {
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
 }
 
-/* Colores específicos para cada categoría si quieres diferenciarlas */
-.category-badge:contains("Joyas"),
-.badge:contains("Joyas") {
+/* Colores específicos para cada categoría */
+.category-badge[data-category="joyas"] {
   background: linear-gradient(45deg, #ffd700, #ffb347) !important;
   color: #000 !important;
   font-weight: 600;
 }
 
-.category-badge:contains("Cerámicas"),
-.badge:contains("Cerámicas") {
+.category-badge[data-category="ceramicas"] {
   background: linear-gradient(45deg, #d35400, #e67e22) !important;
   color: white !important;
 }
 
-.category-badge:contains("Otros"),
-.badge:contains("Otros") {
+.category-badge[data-category="otros"] {
   background: linear-gradient(45deg, #2c3e50, #34495e) !important;
   color: white !important;
 }
 
-.category-badge:contains("Collares"),
-.badge:contains("Collares") {
+.category-badge[data-category="collares"] {
   background: linear-gradient(45deg, #ffb347, #ffa500) !important;
   color: #000 !important;
   font-weight: 600;
 }
 
-.category-badge:contains("Pulseras"),
-.badge:contains("Pulseras") {
+.category-badge[data-category="pulseras"] {
   background: linear-gradient(45deg, #c0392b, #e74c3c) !important;
   color: white !important;
 }
 
-.category-badge:contains("Aretes"),
-.badge:contains("Aretes") {
+.category-badge[data-category="aretes"] {
   background: linear-gradient(45deg, #2980b9, #3498db) !important;
   color: white !important;
 }
 
-.category-badge:contains("Anillos"),
-.badge:contains("Anillos") {
+.category-badge[data-category="anillos"] {
   background: linear-gradient(45deg, #16a085, #1abc9c) !important;
   color: white !important;
 }
@@ -780,12 +801,6 @@ section h2:after {
     opacity: 1;
     transform: scale(1) translateY(0);
   }
-}
-
-@keyframes pulse {
-  0% { box-shadow: 0 4px 12px rgba(40,167,69,0.3); }
-  50% { box-shadow: 0 6px 16px rgba(40,167,69,0.5); }
-  100% { box-shadow: 0 4px 12px rgba(40,167,69,0.3); }
 }
 
 /* Filtros de categoría */
@@ -995,31 +1010,31 @@ footer p, footer .small {
   transform: translateY(0);
 }
 
-/* === RESPONSIVE GENERAL === */
+/* === RESPONSIVE SIN ESPACIOS === */
 @media (max-width: 768px) {
   section h2 {
     font-size: 2rem;
   }
   
   .product-card {
-    height: 380px; /* Altura ajustada para móvil */
+    height: 380px;
   }
   
   .product-card .card-img-top {
-    height: 240px; /* Imagen más pequeña en móvil */
+    height: 250px; /* Ajustado para tablet */
   }
   
   .product-info {
-    min-height: 110px;
-    padding: 12px;
+    min-height: 130px;
+    padding: 15px 12px;
   }
   
   .product-info h6 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
   
   .product-info p {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
   
   .admin-btn {
@@ -1039,36 +1054,36 @@ footer p, footer .small {
     gap: 20px;
   }
   
-  .product-price {
+  .category-badge {
     padding: 6px 10px;
     font-size: 0.8rem;
-  }
-  
-  .category-badge {
-    padding: 5px 8px;
-    font-size: 0.75rem;
   }
 }
 
 @media (max-width: 480px) {
   .product-card {
-    height: 350px;
+    height: 360px;
   }
   
   .product-card .card-img-top {
-    height: 220px;
+    height: 240px; /* Ajustado para móvil */
   }
   
   .product-info {
-    min-height: 100px;
-    padding: 10px;
+    min-height: 120px;
+    padding: 12px 10px;
   }
   
   .product-info h6 {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   
   .product-info p {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+  }
+  
+  .category-badge {
+    padding: 5px 8px;
+    font-size: 0.75rem;
   }
 }

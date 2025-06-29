@@ -61,19 +61,6 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
       box-shadow: 0 6px 20px rgba(0,123,255,0.4);
     }
     
-    .product-price {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: linear-gradient(45deg, #28a745, #20c997);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 15px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    
     .category-filter {
       background: linear-gradient(135deg, #000 0%, #2c2c2c 100%) !important;
       color: white;
@@ -119,7 +106,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     
     .product-card {
       position: relative;
-      height: 350px;
+      height: 420px;
       overflow: hidden;
       border-radius: 15px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.1);
@@ -133,22 +120,6 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     
     .product-card:hover .card-img-top {
       transform: scale(1.05);
-    }
-    
-    .product-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
-      color: white;
-      padding: 20px;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    
-    .product-card:hover .product-info {
-      transform: translateY(0);
     }
     
     /* Mejora para navegación de secciones */
@@ -446,7 +417,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     </div>
   </section>
 
-  <!-- Sección Productos -->
+  <!-- Sección Productos ACTUALIZADA CON INFO SIEMPRE VISIBLE Y SIN DOBLE $ -->
   <section id="productos" class="py-5 bg-light">
     <div class="container">
       <h2 class="text-center mb-4">
@@ -470,27 +441,32 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
                  target="_blank" rel="noopener noreferrer"
                  class="product-link text-decoration-none">
                 <div class="card product-card border-0">
-                  <!-- Precio -->
-                  <div class="product-price">
-                    $<?= number_format($row['precio'], 0, ',', '.') ?>
-                  </div>
                   
-                  <!-- Categoría -->
-                  <div class="category-badge">
+                  <!-- Badge de Categoría -->
+                  <div class="category-badge" data-category="<?= htmlspecialchars($row['categoria']) ?>">
                     <?= ucfirst(htmlspecialchars($row['categoria'])) ?>
                   </div>
                   
-                  <!-- Imagen -->
+                  <!-- Imagen del Producto -->
                   <img src="<?= htmlspecialchars($row['imagen']) ?>" 
                        class="card-img-top" 
                        alt="<?= htmlspecialchars($row['nombre']) ?>">
                   
-                  <!-- Información del producto -->
+                  <!-- Información del producto SIEMPRE VISIBLE -->
                   <div class="product-info">
                     <h6 class="mb-2"><?= htmlspecialchars($row['nombre']) ?></h6>
-                    <p class="mb-2">
+                    
+                    <!-- Precio prominente - CORREGIDO SIN DOBLE $ -->
+                    <div class="price-display">
+                      $<?= number_format($row['precio'], 0, ',', '.') ?> CLP
+                    </div>
+                    
+                    <!-- Categoría -->
+                    <p class="mb-1">
                       <i class="fas fa-tag"></i> <?= ucfirst(htmlspecialchars($row['categoria'])) ?>
                     </p>
+                    
+                    <!-- Enlace a Instagram -->
                     <p class="mb-0">
                       <i class="fab fa-instagram"></i> Ver en Instagram
                     </p>
