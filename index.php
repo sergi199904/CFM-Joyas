@@ -184,70 +184,88 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     </p>
   </header>
 
- <!-- Carrusel Mejorado - Reemplazar en index.php -->
-<div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="4000">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
-    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="3"></button>
-    <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="4"></button>
+  <!-- CARRUSEL OPTIMIZADO - SOLO PRIMERA IMAGEN CON TEXTO -->
+  <div id="mainCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="3"></button>
+      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="4"></button>
+      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="5"></button>
+      <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="6"></button>
+    </div>
+    
+    <div class="carousel-inner">
+      <!-- Slide 1: Imagen 6 - ÚNICA CON TEXTO DE BIENVENIDA -->
+      <div class="carousel-item active">
+        <div class="carousel-image-container">
+          <img src="img/carrusel/imagen6.jpg" class="d-block carousel-img" alt="Bienvenidos a CFM Joyas">
+          <div class="carousel-overlay"></div>
+        </div>
+        <div class="carousel-caption">
+          <div class="carousel-content">
+            <h2 class="carousel-title">Bienvenidos a CFM Joyas</h2>
+            <p class="carousel-description">Un espacio donde el arte, la creatividad y la calidad se encuentran para ofrecerte la mejor experiencia en joyas y cerámicas.</p>
+            <a href="#contacto" class="btn-carousel">
+              <i class="fas fa-store"></i> Visítanos
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Imagen 2 - SOLO IMAGEN -->
+      <div class="carousel-item">
+        <div class="carousel-image-container">
+          <img src="img/carrusel/imagen2.jpg" class="d-block carousel-img" alt="Collares con piedras naturales de colores">
+        </div>
+      </div>
+
+      <!-- Slide 4: Imagen 7 - SOLO IMAGEN -->
+      <div class="carousel-item">
+        <div class="carousel-image-container">
+          <img src="img/carrusel/imagen7.jpg" class="d-block carousel-img" alt="Pulseras artesanales con diferentes estilos">
+        </div>
+      </div>
+
+      <!-- Slide 5: Imagen 5 - SOLO IMAGEN -->
+      <div class="carousel-item">
+        <div class="carousel-image-container">
+          <img src="img/carrusel/imagen5.jpg" class="d-block carousel-img" alt="Colección premium de joyas variadas">
+        </div>
+      </div>
+
+      <!-- Slide 6: Imagen 3 - SOLO IMAGEN -->
+      <div class="carousel-item">
+        <div class="carousel-image-container">
+          <img src="img/carrusel/imagen3.jpg" class="d-block carousel-img" alt="Cerámicas artesanales hechas a mano">
+        </div>
+      </div>
+
+      <!-- Slide 7: Imagen 4 - SOLO IMAGEN -->
+      <div class="carousel-item">
+        <div class="carousel-image-container">
+          <img src="img/carrusel/imagen4.jpg" class="d-block carousel-img" alt="Piezas únicas de cerámica funcional">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Controles -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+      <div class="carousel-control-icon">
+        <i class="fas fa-chevron-left"></i>
+      </div>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    
+    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+      <div class="carousel-control-icon">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
   </div>
-  
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="carousel-image-container">
-        <img src="img\Carrusel\Image 8.jpg" class="d-block w-100 carousel-img" alt="Collares con Piedras Naturales">
-        <div class="carousel-overlay"></div>
-      </div>
-      </div>
-    </div>
-    
-    <div class="carousel-item">
-      <div class="carousel-image-container">
-        <img src="img\Carrusel\Image 2.jpg" class="d-block w-100 carousel-img" alt="Pulseras Artesanales">
-        <div class="carousel-overlay"></div>
-      </div>
-    </div>
-    
-    <div class="carousel-item">
-      <div class="carousel-image-container">
-        <img src="img\Carrusel\Image 1.jpg" class="d-block w-100 carousel-img" alt="Colección Premium">
-        <div class="carousel-overlay"></div>
-      </div>
-    </div>
-    
-    <div class="carousel-item">
-      <div class="carousel-image-container">
-        <img src="img\Carrusel\image 11.jpg" class="d-block w-100 carousel-img" alt="Cerámicas Artesanales">
-        <div class="carousel-overlay"></div>
-      </div>
-    </div>
-    
-    <div class="carousel-item">
-      <div class="carousel-image-container">
-        <img src="img\Carrusel\image 10.jpg" class="d-block w-100 carousel-img" alt="Ambiente de Tienda">
-        <div class="carousel-overlay"></div>
-      </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Controles mejorados -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-    <div class="carousel-control-icon">
-      <i class="fas fa-chevron-left"></i>
-    </div>
-    <span class="visually-hidden">Anterior</span>
-  </button>
-  
-  <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-    <div class="carousel-control-icon">
-      <i class="fas fa-chevron-right"></i>
-    </div>
-    <span class="visually-hidden">Siguiente</span>
-  </button>
-</div>
+
   <!-- Sección Historia -->
   <section id="historia" class="py-5 text-center">
     <div class="container">
@@ -405,24 +423,24 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     </div>
   </section>
 
-<!-- Sección Ubicación -->
-<section id="ubicacion" class="py-5 bg-light">
-  <div class="container text-center">
-    <h2 class="mb-4">Ubicación</h2>
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <iframe src="https://maps.google.com/maps?q=-32.5541667,-71.4577222&output=embed"
-                width="100%" height="300" style="border:0; border-radius:10px;" class="shadow"></iframe>
-        <p class="mt-3 text-muted">
-          <i class="fas fa-map-marker-alt"></i> Zapallar, Región de Valparaíso, Chile
-        </p>
-        <p class="text-muted small">
-          <i class="fas fa-compass"></i> 32°33'15.0"S 71°27'27.8"W
-        </p>
+  <!-- Sección Ubicación -->
+  <section id="ubicacion" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="mb-4">Ubicación</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <iframe src="https://maps.google.com/maps?q=-32.5541667,-71.4577222&output=embed"
+                  width="100%" height="300" style="border:0; border-radius:10px;" class="shadow"></iframe>
+          <p class="mt-3 text-muted">
+            <i class="fas fa-map-marker-alt"></i> Zapallar, Región de Valparaíso, Chile
+          </p>
+          <p class="text-muted small">
+            <i class="fas fa-compass"></i> 32°33'15.0"S 71°27'27.8"W
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- Redes Sociales -->
   <div class="social-media text-center py-4">
@@ -475,6 +493,24 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // Inicializar carrusel con configuraciones personalizadas
+      const carousel = new bootstrap.Carousel('#mainCarousel', {
+        interval: 5000,
+        wrap: true,
+        touch: true
+      });
+
+      // Pausar en hover para mejor experiencia de usuario
+      const carouselElement = document.getElementById('mainCarousel');
+      
+      carouselElement.addEventListener('mouseenter', () => {
+        carousel.pause();
+      });
+      
+      carouselElement.addEventListener('mouseleave', () => {
+        carousel.cycle();
+      });
+
       // Animación de entrada para productos
       document.querySelectorAll('.product-link').forEach((el, i) => {
         el.style.animationDelay = (i * 0.1) + 's';
@@ -516,6 +552,33 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
       });
       adminBtn.addEventListener('mouseleave', () => {
         adminBtn.innerHTML = '<i class="fas fa-cog"></i> Admin';
+      });
+
+      // Efecto adicional para los botones del carrusel
+      document.querySelectorAll('.btn-carousel').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          
+          // Efecto de pulso
+          btn.style.transform = 'scale(0.95)';
+          setTimeout(() => {
+            btn.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+              btn.style.transform = '';
+            }, 150);
+          }, 100);
+          
+          // Navegación real al href
+          const targetId = btn.getAttribute('href');
+          const target = document.querySelector(targetId);
+          if (target) {
+            const targetPosition = target.offsetTop - 90;
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
       });
     });
   </script>
