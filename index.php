@@ -358,9 +358,7 @@ $categories = $conn->query("SELECT nombre, COUNT(*) as total FROM productos GROU
     <div class="container">
       <h2 class="mb-4">Una parte de nosotros</h2>
       <p class="mx-auto" style="max-width:700px;">
-        En CFM Joyas creamos piezas únicas que reflejan la belleza y elegancia. 
-        Desde joyas artesanales hasta cerámicas especiales, cada producto cuenta una historia 
-        y representa la pasión por el arte y la calidad.
+       Me cambié a Zapallar en busca de una vida más tranquila, donde el arte se convirtió en mi forma de expresión. Desde la cerámica hasta la joyería, cada pieza refleja mi creatividad . En esta página comparto no solo mis creaciones, sino también mi mundo.
       </p>
     </div>
   </section>
